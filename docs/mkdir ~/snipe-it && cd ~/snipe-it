@@ -1,0 +1,2 @@
+mkdir ~/snipe-it && cd ~/snipe-it
+nano docker-compose.yml
