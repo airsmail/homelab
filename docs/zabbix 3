@@ -1,0 +1,12 @@
+System Startup
+Start the containers in the background:
+
+Bash
+sudo docker compose up -d
+Access the Zabbix Web interface by navigating to http://SERVER_IP_ADDRESS:8081 in your web browser.
+
+Default Username: Admin (Case-sensitive)
+
+Default Password: zabbix
+(Note: Ensure you change these default credentials immediately upon the first login.)
+
