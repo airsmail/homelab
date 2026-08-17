@@ -8,7 +8,7 @@ My personal homelab environment — a space for continuous learning and hands-on
 
 ## 📌 Purpose
 
-This repo documents the technologies I use in enterprise environments as an IT Professional, applied and tested in my own homelab — including the tools I've learned, the problems I've run into, and how I solved them.
+This repo documents the technologies I use in enterprise environments as an IT professional, applied and tested in my own homelab — including the tools I've learned, the problems I've run into, and how I solved them.
 
 ---
 
@@ -58,7 +58,7 @@ graph TD
     end
 
     subgraph LocalDC ["🏠 On-Premise Datacenter"]
-        QNAP["QNAP NAS (SNMPv3 Monitored)"]:::physical
+        QNAP["QNAP NAS (Centralized Storage)"]:::physical
         
         subgraph Proxmox1 ["Proxmox VE 9 (Node 1 - Compute)"]
             direction TB
@@ -84,15 +84,20 @@ graph TD
         end
     end
 
+    %% Fiziksel Ağ Bağlantıları
     VPN <-->|Encrypted Tunnel| Sophos
     Sophos <--> Switch
     Switch <--> QNAP
     Switch <--> Proxmox1
     Switch <--> Proxmox2
     
+    %% Mantıksal Entegrasyonlar ve Veri Akışı
+    Proxmox1 -.->|VM Datastore NFS and iSCSI| QNAP
+    PBS -.->|Backup Target| QNAP
+    Veeam -.->|Backup Repository| QNAP
     WinDC -.->|Azure AD Connect| EntraID
     RootCA -.->|Issues Certs to| IssueCA
-    IssueCA -.->|Provides SSL/TLS| LocalDC
+    IssueCA -.->|Provides SSL and TLS| LocalDC
     Zabbix -.->|SNMPv3 authPriv| QNAP
     Zabbix -.->|Zabbix Agent 2| DockerEnv
 ```
