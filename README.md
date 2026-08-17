@@ -30,7 +30,7 @@ This repo documents the technologies I use in enterprise environments as an IT p
 | Component | Tool Used | Purpose |
 |---|---|---|
 | Identity Management | Entra ID (Azure AD) | Cloud identity synced with the Local Active Directory |
-| Mail Infrastructure | Exchange Server 2016 (DAG) | Decentralized Availability Group architecture for HA testing |
+
 | Compliance & Data Governance | Microsoft Purview | Data Loss Prevention (DLP) and sensitivity labels |
 | Storage | Azure Storage | Cloud storage solutions |
 
@@ -68,7 +68,7 @@ graph TD
             WinDC["Local AD Domain Controller"]:::vm
             RootCA["Offline Root CA"]:::vm
             IssueCA["Issuing CA"]:::vm
-            Exchange["Exchange Server 2016 (DAG)"]:::vm
+            
             Veeam["Veeam Backup-Replication"]:::vm
             Snipe-IT["Snipe-IT (Asset Management)"]:::vm
             
@@ -94,7 +94,7 @@ graph TD
     IssueCA -.->|Provides SSL/TLS| LocalDC
     Zabbix -.->|SNMPv3 authPriv| QNAP
     Zabbix -.->|Zabbix Agent 2| DockerEnv
-    Exchange -.->|Hybrid Mail Flow| M365_Azure
+    
 ```
 
 ---
@@ -132,7 +132,7 @@ This section documents technical issues I've run into during the homelab journey
 
 - Successfully deployed a container-native IT Asset Management architecture that eliminates "Dependency Hell" for PHP environments.
 - Mastered secure device monitoring via Zabbix using Active Polling rather than passive Trapping.
-- Integrated legacy on-premise components (Exchange DAG) with modern cloud compliance tools (Purview) to simulate regulated industry standards.
+
 - Established a robust Two-Tier PKI infrastructure (Root CA & Issuing CA) for secure internal network communications and certificate lifecycle management.
 
 ---
