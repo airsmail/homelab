@@ -95,5 +95,5 @@ This section documents technical issues I've run into during the homelab journey
 
 ## 🔗 Contact
 
-- [LinkedIn](#)
+- [LinkedIn]([#](https://www.linkedin.com/in/ismail-bostan-88a85844/))
 - [E-mail](#)
