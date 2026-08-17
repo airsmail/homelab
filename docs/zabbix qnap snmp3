@@ -1,0 +1,32 @@
+---
+
+###  `zabbix-qnap-snmpv3.md`
+
+```markdown
+# QNAP NAS & Zabbix SNMPv3 (authPriv) Integration
+
+This document explains how to connect storage units (QNAP NAS) to the Zabbix monitoring system via SNMPv3 using the highest security level, `authPriv` (Authentication & Privacy) mode, to prevent plaintext vulnerabilities.
+
+## 1. SNMPv3 Configuration on QNAP
+SNMP settings from the device's control panel should be configured as follows:
+
+*   **Port:** `161` (Standard)
+*   **SNMP Trap Level:** Left blank. (Zabbix will perform Active Polling instead of Trapping).
+*   **SNMP Version:** `SNMP V3`
+*   **Username:** `zabbix_snmp`
+*   **Authentication:** Enabled. `HMAC-SHA` (or the highest supported SHA version) is selected as the protocol, and a strong authentication password is provided.
+*   **Privacy:** Enabled. AES (or forced to `CBC-DES` if the hardware does not support AES) is selected as the protocol and encrypted.
+
+## 2. Adding Host on Zabbix
+Add the device by navigating to the `Data Collection > Hosts` tab in the Zabbix web interface:
+
+*   **Templates:** `Generic by SNMP` (or `QNAP by SNMP` if imported manually)
+*   **Interfaces:** Add > SNMP (Port: 161, Version: SNMPv3)
+*   **Security Name:** `zabbix_snmp`
+*   **Security Level:** `authPriv`
+*   **Authentication Protocol:** `SHA` (Same as QNAP)
+*   **Privacy Protocol:** `DES` (or the encryption selected on QNAP)
+*   Enter the security keys defined in QNAP into the password fields and save.
+
+## 💡 Architectural Note
+**Active Polling** was preferred over passive listening (Trapping) in this system. This allows Zabbix to maintain full control; it immediately generates an alert (Trigger) when the device drops from the network or becomes unreachable.
