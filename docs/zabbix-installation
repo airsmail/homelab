@@ -1,0 +1,9 @@
+# **Zabbix Enterprise Central Telemetry Deployment Guide**
+
+This document contains the deployment steps for a centralized network telemetry system using Zabbix. The infrastructure is designed to monitor metrics and resource health from backup servers, domain controllers, and network storage devices securely via SNMP.
+
+## **1. Project Directory Preparation**
+Create an isolated directory for the Zabbix stack and create the compose file:
+```bash
+mkdir ~/zabbix-server && cd ~/zabbix-server
+nano docker-compose.yml
