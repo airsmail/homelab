@@ -8,7 +8,7 @@ My personal homelab environment — a space for continuous learning and hands-on
 
 ## 📌 Purpose
 
-This repo documents the technologies I use in enterprise environments as a Senior IT Team Lead, applied and tested in my own homelab — including the tools I've learned, the problems I've run into, and how I solved them.
+This repo documents the technologies I use in enterprise environments as an IT Professional, applied and tested in my own homelab — including the tools I've learned, the problems I've run into, and how I solved them.
 
 ---
 
