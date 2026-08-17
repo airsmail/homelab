@@ -17,7 +17,7 @@ This repo documents the technologies I use in enterprise environments as an IT p
 | Component | Tool Used | Purpose |
 |---|---|---|
 | Virtualization Node | Proxmox VE 9 | Core hypervisor for all VMs and LXC containers |
-| Container Cluster | Red Hat OpenShift Local | Testing container-native virtualization and taints |
+| Container Cluster | Testing container-native virtualization and taints |
 | Domain Controller | Windows Server AD DS | Local Domain Controller (DC) for on-premise identity |
 | Certificate Authority | Windows Server AD CS | Two-tier Internal PKI (Root CA & Issuing CA) for secure communications |
 | Storage / NAS | QNAP | Centralized storage, RAID, and secure SNMPv3 monitoring |
