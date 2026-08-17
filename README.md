@@ -8,7 +8,7 @@ My personal homelab environment — a space for continuous learning and hands-on
 
 ## 📌 Purpose
 
-This repo documents the technologies I use in enterprise environments as an IT professional, applied and tested in my own homelab — including the tools I've learned, the problems I've run into, and how I solved them.
+This repo documents the technologies I use in enterprise environments as a Senior IT Team Lead, applied and tested in my own homelab — including the tools I've learned, the problems I've run into, and how I solved them.
 
 ---
 
@@ -29,7 +29,6 @@ This repo documents the technologies I use in enterprise environments as an IT p
 | Component | Tool Used | Purpose |
 |---|---|---|
 | Identity Management | Entra ID (Azure AD) | Cloud identity synced with the Local Active Directory |
-
 | Compliance & Data Governance | Microsoft Purview | Data Loss Prevention (DLP) and sensitivity labels |
 | Storage | Azure Storage | Cloud storage solutions |
 
@@ -61,14 +60,11 @@ graph TD
     subgraph LocalDC ["🏠 On-Premise Datacenter"]
         QNAP["QNAP NAS (SNMPv3 Monitored)"]:::physical
         
-        subgraph Proxmox ["Proxmox VE 9 Cluster"]
+        subgraph Proxmox1 ["Proxmox VE 9 (Node 1 - Compute)"]
             direction TB
-            PBS["Proxmox Backup Server (PBS)"]:::vm
             WinDC["Local AD Domain Controller"]:::vm
             RootCA["Offline Root CA"]:::vm
             IssueCA["Issuing CA"]:::vm
-            
-            Veeam["Veeam Backup-Replication"]:::vm
             Snipe-IT["Snipe-IT (Asset Management)"]:::vm
             
             subgraph DockerEnv ["🐳 Ubuntu Docker Host"]
@@ -78,22 +74,27 @@ graph TD
                 Portainer["Portainer (Container UI)"]:::docker
                 UptimeKuma["Uptime Kuma (Monitoring)"]:::docker
                 ITTools["IT Tools (Utility Suite)"]:::docker
-                
             end
+        end
+
+        subgraph Proxmox2 ["Proxmox VE 9 (Node 2 - Backup & DR)"]
+            direction TB
+            PBS["Proxmox Backup Server (PBS)"]:::vm
+            Veeam["Veeam Backup-Replication"]:::vm
         end
     end
 
     VPN <-->|Encrypted Tunnel| Sophos
     Sophos <--> Switch
     Switch <--> QNAP
-    Switch <--> Proxmox
+    Switch <--> Proxmox1
+    Switch <--> Proxmox2
     
     WinDC -.->|Azure AD Connect| EntraID
     RootCA -.->|Issues Certs to| IssueCA
     IssueCA -.->|Provides SSL/TLS| LocalDC
     Zabbix -.->|SNMPv3 authPriv| QNAP
     Zabbix -.->|Zabbix Agent 2| DockerEnv
-    
 ```
 
 ---
@@ -106,6 +107,9 @@ Services I run via Docker Compose in isolated environments:
 *   **Ollama:** Local AI/LLM workloads, featuring a custom automated web scanning task scheduled to run every Wednesday.
 *   **LoveBox:** Custom containerized Python Flask application for automated email notifications.
 *   **Zabbix Agent 2:** Container telemetry and health monitoring.
+*   **Portainer:** Web-based GUI for managing Docker containers, images, volumes, and network stacks.
+*   **Uptime Kuma:** Self-hosted proactive monitoring tool for tracking service availability and latency.
+*   **IT Tools:** Locally hosted collection of essential tools and utilities for IT and network troubleshooting.
 
 ---
 
@@ -131,7 +135,6 @@ This section documents technical issues I've run into during the homelab journey
 
 - Successfully deployed a container-native IT Asset Management architecture that eliminates "Dependency Hell" for PHP environments.
 - Mastered secure device monitoring via Zabbix using Active Polling rather than passive Trapping.
-
 - Established a robust Two-Tier PKI infrastructure (Root CA & Issuing CA) for secure internal network communications and certificate lifecycle management.
 
 ---
