@@ -1,0 +1,9 @@
+First, start the system with the temporary key: sudo docker compose up -d
+
+Generate the actual APP_KEY value: sudo docker exec -it snipe-web-app php artisan key:generate --show
+
+Copy the generated key starting with "base64:" exactly and paste it into the APP_KEY field in the docker-compose.yml file.
+
+Restart the system: sudo docker compose down && sudo docker compose up -d
+
+The installation is complete. You can access the interface by navigating to port 8080 in your web browser.
