@@ -141,6 +141,7 @@ This section documents technical issues I've run into during the homelab journey
 - Successfully deployed a container-native IT Asset Management architecture that eliminates "Dependency Hell" for PHP environments.
 - Mastered secure device monitoring via Zabbix using Active Polling rather than passive Trapping.
 - Established a robust Two-Tier PKI infrastructure (Root CA & Issuing CA) for secure internal network communications and certificate lifecycle management.
+- Utilized CLI-based performance monitoring tools (`btop`, `lm-sensors`) for real-time hardware diagnostics and thermal tracking directly from the Proxmox hypervisor shell.
 
 ---
 
